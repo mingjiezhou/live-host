@@ -1,0 +1,24 @@
+{
+  "scopeName": "source.host",
+  "fileTypes":[".host",".host"],
+  "patterns": [
+    { "include": "#host-comment" },
+    { "include": "#host-ip"},
+    { "include": "#host-domain"}
+  ],
+  "repository": {
+    "host-comment":{
+      "name": "comment",
+      "begin": "#",
+      "end": "\\n"
+    },
+    "host-ip":{
+      "name": "keyword",
+      "match":"[a-zA-Z]\\w*"
+    },
+    "host-domain":{
+      "name": "keyword",
+      "match":"[a-zA-Z]\\w*"
+    }
+  }
+}

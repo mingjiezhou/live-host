@@ -1,26 +1,48 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import { CatCodingPanel } from './webview';
+import { HostTreeDataProvider, HostConfig } from './treeDataProvider';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-	
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "live-host" is now active!');
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('live-host.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from live-host!');
+	console.log('Congratulations, your extension "host" is now active!');
+
+	const hostTreeDataProvider = new HostTreeDataProvider(context);
+
+	context.subscriptions.push(vscode.window.registerTreeDataProvider("host", hostTreeDataProvider));
+
+	context.subscriptions.push(vscode.commands.registerCommand('host.add', (item: HostConfig) => {
+		hostTreeDataProvider.add(item);
+	}));
+	context.subscriptions.push(vscode.commands.registerCommand('host.delete', (item: HostConfig) => {
+		hostTreeDataProvider.del(item);
+	}));
+	context.subscriptions.push(vscode.commands.registerCommand('host.rename', (item: HostConfig) => {
+		hostTreeDataProvider.rename(item);
+	}));
+	context.subscriptions.push(vscode.commands.registerCommand('host.choose', (item: HostConfig) => {
+		hostTreeDataProvider.choose(item);
+	}));
+	context.subscriptions.push(vscode.commands.registerCommand('host.unchoose', (item: HostConfig) => {
+		hostTreeDataProvider.unchoose(item);
+	}));
+	context.subscriptions.push(vscode.commands.registerCommand('host.edit', (params) => {
+		hostTreeDataProvider.edit(params);
+	}));
+	context.subscriptions.push(vscode.commands.registerCommand('catCoding.start', () => {
+		CatCodingPanel.createOrShow(context.extensionUri);
+	}));
+
+	vscode.workspace.onDidSaveTextDocument((e:vscode.TextDocument) => {
+		if(e.fileName && e.fileName.indexOf('.host') > -1){
+			hostTreeDataProvider.syncChooseHost();
+		}
 	});
-
-	context.subscriptions.push(disposable);
 }
+
 
 // this method is called when your extension is deactivated
 export function deactivate() {}
+
+
+
+

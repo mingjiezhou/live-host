@@ -1,45 +1,168 @@
 {
-  "name": "live-host",
-	"displayName": "live-host",
-	"description": "auto host tool",
-	"version": "0.0.1",
-	"engines": {
-		"vscode": "^1.66.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-        "onCommand:live-host.helloWorld"
-	],
-	"main": "./out/extension.js",
-	"contributes": {
-		"commands": [
-			{
-				"command": "live-host.helloWorld",
-				"title": "Hello World"
-			}
-		]
-	},
-	"scripts": {
-		"vscode:prepublish": "yarn run compile",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"pretest": "yarn run compile && yarn run lint",
-		"lint": "eslint src --ext ts",
-		"test": "node ./out/test/runTest.js"
-	},
-	"devDependencies": {
-		"@types/vscode": "^1.66.0",
-		"@types/glob": "^7.2.0",
-		"@types/mocha": "^9.1.1",
-		"@types/node": "14.x",
-		"@typescript-eslint/eslint-plugin": "^5.21.0",
-		"@typescript-eslint/parser": "^5.21.0",
-		"eslint": "^8.14.0",
-		"glob": "^8.0.1",
-		"mocha": "^9.2.2",
-		"typescript": "^4.6.4",
-		"@vscode/test-electron": "^2.1.3"
-	}
+  "name": "LiveHost",
+  "displayName": "Live Host",
+  "publisher": "zhoumingjie",
+  "description": "1、快捷编辑 host 文件； 2、自动监听切换 github IP",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.66.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:host",
+    "onView:host"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "host",
+        "extensions": [
+          ".host"
+        ],
+        "aliases": [
+          "host"
+        ]
+      }
+    ],
+    "grammars": [
+      {
+        "language": "host",
+        "scopeName": "source.host",
+        "path": "./syntaxes/host.tmLanguage.json"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "liveHost",
+          "title": "liveHost",
+          "icon": "resources/hosted.png"
+        }
+      ]
+    },
+    "views": {
+      "liveHost": [
+        {
+          "id": "host",
+          "name": "host"
+        },
+        {
+          "id": "host-auto",
+          "name": "host-auto"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "host-auto",
+        "contents": "\n [🏠️ GitHub Host 最新配置](command:catCoding.start) \n 欢迎使用live host ^_^，[使用手册](https://github.com/mingjiezhou/notes/issues)，源码 [Github](https://github.com/mingjiezhou/)"
+      }
+    ],
+    "commands": [
+      {
+        "command": "host.start",
+        "title": "host.start"
+      },
+      {
+        "command": "host.choose",
+        "title": "Choose"
+      },
+      {
+        "command": "host.unchoose",
+        "title": "UnChoose"
+      },
+      {
+        "command": "host.rename",
+        "title": "Rename"
+      },
+      {
+        "command": "host.delete",
+        "title": "Delete"
+      },
+      {
+        "command": "host.add",
+        "title": "Add",
+        "icon": {
+          "light": "resources/light/add.svg",
+          "dark": "resources/dark/add.svg"
+        }
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "host.add",
+          "when": "view == host",
+          "group": "navigation@1"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "host.unchoose",
+          "when": "view == host && viewItem == hostItem1",
+          "group": "host@1"
+        },
+        {
+          "command": "host.choose",
+          "when": "view == host && viewItem == hostItem0",
+          "group": "host@1"
+        },
+        {
+          "command": "host.rename",
+          "when": "view == host && viewItem =~ /hostItem/i",
+          "group": "host@1"
+        },
+        {
+          "command": "host.delete",
+          "when": "view == host && viewItem =~ /hostItem/i",
+          "group": "host@1"
+        },
+        {
+          "command": "host.add",
+          "when": "view == host && viewItem =~ /hostItem/i",
+          "group": "host@1"
+        }
+      ]
+    },
+    "configuration": {
+      "properties": {
+        "host-auto.fundGroups": {
+          "type": "string",
+          "default": [
+            "我的基金"
+          ],
+          "description": "配置基金分组名称（建议通过界面新增）"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "yarn run compile && yarn run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.2.0",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "14.x",
+    "@types/vscode": "^1.66.0",
+    "@typescript-eslint/eslint-plugin": "^5.21.0",
+    "@typescript-eslint/parser": "^5.21.0",
+    "@vscode/test-electron": "^2.1.3",
+    "eslint": "^8.14.0",
+    "glob": "^8.0.1",
+    "mocha": "^9.2.2",
+    "typescript": "^4.6.4",
+		"vsce": "^1.78.0"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "cheerio": "^1.0.0-rc.10"
+  }
 }
