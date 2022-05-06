@@ -196,7 +196,7 @@ function getWebviewOptions(extensionUri: vscode.Uri): vscode.WebviewOptions {
 	public getIp() {
     let url = `https://gitee.com/isevenluo/github-hosts/raw/master/hosts`;
 		
-		axios.get(url).then(res => {
+		axios.get(url).then((res:any) => {
 				let list = '\n'.concat(res.data).split('#');
 				list.splice(-4, 2);
 				data = list.join('#');
