@@ -2,12 +2,13 @@
   "name": "LiveHost",
   "displayName": "Live Host",
   "publisher": "zhoumingjie",
-  "description": "1、快捷编辑 host 文件； 2、自动监听切换 github IP",
+  "description": "1. Quickly edit system hosts file;； 2. Get best ip about github",
   "repository": {
 		"type": "git",
 		"url": "https://github.com/mingjiezhou/notes.git"
 	},
-  "version": "0.0.1",
+  "version": "1.0.0",
+	"icon": "logo.png",
   "engines": {
     "vscode": "^1.66.0"
   },
