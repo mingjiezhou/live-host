@@ -3,6 +3,10 @@
   "displayName": "Live Host",
   "publisher": "zhoumingjie",
   "description": "1、快捷编辑 host 文件； 2、自动监听切换 github IP",
+  "repository": {
+		"type": "git",
+		"url": "https://github.com/mingjiezhou/notes.git"
+	},
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.66.0"
@@ -11,8 +15,7 @@
     "Other"
   ],
   "activationEvents": [
-    "onLanguage:host",
-    "onView:host"
+		"*"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -39,51 +42,51 @@
         {
           "id": "liveHost",
           "title": "liveHost",
-          "icon": "resources/hosted.png"
+          "icon": "resources/host.png"
         }
       ]
     },
     "views": {
       "liveHost": [
         {
-          "id": "host",
+          "id": "liveHost",
           "name": "host"
         },
         {
-          "id": "host-auto",
+          "id": "liveHostAuto",
           "name": "host-auto"
         }
       ]
     },
     "viewsWelcome": [
       {
-        "view": "host-auto",
-        "contents": "\n [🏠️ GitHub Host 最新配置](command:catCoding.start) \n 欢迎使用live host ^_^，[使用手册](https://github.com/mingjiezhou/notes/issues)，源码 [Github](https://github.com/mingjiezhou/)"
+        "view": "liveHostAuto",
+        "contents": "\n [🏠️ GitHub Host 最新配置](command:liveHost.start) \n 欢迎使用live host ^_^，[使用手册](https://github.com/mingjiezhou/notes/issues)，源码 [Github](https://github.com/mingjiezhou/)"
       }
     ],
     "commands": [
       {
-        "command": "host.start",
-        "title": "host.start"
+        "command": "liveHost.start",
+        "title": "liveHost.start"
       },
       {
-        "command": "host.choose",
+        "command": "liveHost.choose",
         "title": "Choose"
       },
       {
-        "command": "host.unchoose",
+        "command": "liveHost.unchoose",
         "title": "UnChoose"
       },
       {
-        "command": "host.rename",
+        "command": "liveHost.rename",
         "title": "Rename"
       },
       {
-        "command": "host.delete",
+        "command": "liveHost.delete",
         "title": "Delete"
       },
       {
-        "command": "host.add",
+        "command": "liveHost.add",
         "title": "Add",
         "icon": {
           "light": "resources/light/add.svg",
@@ -94,35 +97,35 @@
     "menus": {
       "view/title": [
         {
-          "command": "host.add",
-          "when": "view == host",
+          "command": "liveHost.add",
+          "when": "view == liveHost",
           "group": "navigation@1"
         }
       ],
       "view/item/context": [
         {
-          "command": "host.unchoose",
-          "when": "view == host && viewItem == hostItem1",
+          "command": "liveHost.unchoose",
+          "when": "view == liveHost && viewItem == hostItem1",
           "group": "host@1"
         },
         {
-          "command": "host.choose",
-          "when": "view == host && viewItem == hostItem0",
+          "command": "liveHost.choose",
+          "when": "view == liveHost && viewItem == hostItem0",
           "group": "host@1"
         },
         {
-          "command": "host.rename",
-          "when": "view == host && viewItem =~ /hostItem/i",
+          "command": "liveHost.rename",
+          "when": "view == liveHost && viewItem =~ /hostItem/i",
           "group": "host@1"
         },
         {
-          "command": "host.delete",
-          "when": "view == host && viewItem =~ /hostItem/i",
+          "command": "liveHost.delete",
+          "when": "view == liveHost && viewItem =~ /hostItem/i",
           "group": "host@1"
         },
         {
-          "command": "host.add",
-          "when": "view == host && viewItem =~ /hostItem/i",
+          "command": "liveHost.add",
+          "when": "view == liveHost && viewItem =~ /hostItem/i",
           "group": "host@1"
         }
       ]
@@ -148,6 +151,11 @@
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
+
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "cheerio": "^1.0.0-rc.10",
     "@types/glob": "^7.2.0",
     "@types/mocha": "^9.1.1",
     "@types/node": "14.x",
@@ -159,9 +167,5 @@
     "glob": "^8.0.1",
     "mocha": "^9.2.2",
     "typescript": "^4.6.4"
-  },
-  "dependencies": {
-    "axios": "^0.19.2",
-    "cheerio": "^1.0.0-rc.10"
   }
 }

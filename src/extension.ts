@@ -8,27 +8,27 @@ export function activate(context: vscode.ExtensionContext) {
 
 	const hostTreeDataProvider = new HostTreeDataProvider(context);
 
-	context.subscriptions.push(vscode.window.registerTreeDataProvider("host", hostTreeDataProvider));
+	context.subscriptions.push(vscode.window.registerTreeDataProvider("liveHost", hostTreeDataProvider));
 
-	context.subscriptions.push(vscode.commands.registerCommand('host.add', (item: HostConfig) => {
+	context.subscriptions.push(vscode.commands.registerCommand('liveHost.add', (item: HostConfig) => {
 		hostTreeDataProvider.add(item);
 	}));
-	context.subscriptions.push(vscode.commands.registerCommand('host.delete', (item: HostConfig) => {
+	context.subscriptions.push(vscode.commands.registerCommand('liveHost.delete', (item: HostConfig) => {
 		hostTreeDataProvider.del(item);
 	}));
-	context.subscriptions.push(vscode.commands.registerCommand('host.rename', (item: HostConfig) => {
+	context.subscriptions.push(vscode.commands.registerCommand('liveHost.rename', (item: HostConfig) => {
 		hostTreeDataProvider.rename(item);
 	}));
-	context.subscriptions.push(vscode.commands.registerCommand('host.choose', (item: HostConfig) => {
+	context.subscriptions.push(vscode.commands.registerCommand('liveHost.choose', (item: HostConfig) => {
 		hostTreeDataProvider.choose(item);
 	}));
-	context.subscriptions.push(vscode.commands.registerCommand('host.unchoose', (item: HostConfig) => {
+	context.subscriptions.push(vscode.commands.registerCommand('liveHost.unchoose', (item: HostConfig) => {
 		hostTreeDataProvider.unchoose(item);
 	}));
-	context.subscriptions.push(vscode.commands.registerCommand('host.edit', (params) => {
+	context.subscriptions.push(vscode.commands.registerCommand('liveHost.edit', (params) => {
 		hostTreeDataProvider.edit(params);
 	}));
-	context.subscriptions.push(vscode.commands.registerCommand('catCoding.start', () => {
+	context.subscriptions.push(vscode.commands.registerCommand('liveHost.start', () => {
 		CatCodingPanel.createOrShow(context.extensionUri);
 	}));
 
