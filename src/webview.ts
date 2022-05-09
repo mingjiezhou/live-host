@@ -193,18 +193,31 @@ function getWebviewOptions(extensionUri: vscode.Uri): vscode.WebviewOptions {
 			</body>
 			</html>`;
 	}
-	public getIp() {
-    let url = `https://gitee.com/isevenluo/github-hosts/raw/master/hosts`;
-		
-		axios.get(url).then((res:any) => {
-				let list = '\n'.concat(res.data).split('#');
+	public async getIp() {
+    let urlGitee = `https://gitee.com/isevenluo/github-hosts/raw/master/hosts`;
+    let urlGithub = `https://raw.githubusercontent.com/isevenluo/github-hosts/master/hosts`;
+		let list = [];
+		await axios.get(urlGitee).then((res:any) => {
+				list = '\n'.concat(res.data).split('#');
 				list.splice(-4, 2);
 				data = list.join('#');
 				vscode.window.showInformationMessage('结果已出');
 				this._update();
 				return;
 			});
+
+		if(list && list[1].length >= 50) { return false; }; 
+		axios.get(urlGithub).then((res:any) => {
+			let list = '\n'.concat(res.data).split('#');
+			list.splice(-4, 2);
+			data = list.join('#');
+			vscode.window.showInformationMessage('结果已出');
+			this._update();
+			return;
+		});
 	}
+
+	
 }
 
 function getNonce() {
