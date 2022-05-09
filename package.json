@@ -7,7 +7,7 @@
 		"type": "git",
 		"url": "https://github.com/mingjiezhou/notes.git"
 	},
-  "version": "1.0.2",
+  "version": "1.0.3",
 	"icon": "logo.png",
   "engines": {
     "vscode": "^1.66.0"
@@ -62,7 +62,7 @@
     "viewsWelcome": [
       {
         "view": "liveHostAuto",
-        "contents": "\n [🏠️ GitHub Host 最新配置](command:liveHost.start) \n 欢迎使用live host ^_^，[使用手册](https://github.com/mingjiezhou/notes/issues)，源码 [Github](https://github.com/mingjiezhou/)"
+        "contents": "\n [获取配置 GitHub Host](command:liveHost.start) \n 欢迎使用live host ^_^，[使用手册](https://github.com/mingjiezhou/notes/issues/13)，源码 [Github](https://github.com/mingjiezhou/live-host)"
       }
     ],
     "commands": [
