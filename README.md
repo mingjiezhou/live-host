@@ -13,4 +13,4 @@
 [问题反馈](https://github.com/mingjiezhou/live-host/issues)
 
 
-![截图](./resources/des.png)
+![截图](https://user-images.githubusercontent.com/37775265/167404760-e33afdcf-8ba6-4cdf-9741-4d3284974e86.png)
